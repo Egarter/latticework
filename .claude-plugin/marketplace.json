@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "latticework",
+  "description": "A latticework of mental models, installable. Makes the agent think in second-order consequences and inversion before it commits to an answer.",
+  "owner": {
+    "name": "latticework",
+    "url": "https://github.com/your-handle/latticework"
+  },
+  "plugins": [
+    {
+      "name": "latticework",
+      "description": "Always-on mental-models thinking. Frame, check competence, second-order, invert, decide.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}
