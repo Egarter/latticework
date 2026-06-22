@@ -30,7 +30,17 @@ Cite a model only when it changed the answer.
 | `/latticework` | The thinking mode itself. |
 | `/latticework-forward` | Trace second- and third-order consequences of a move. |
 | `/latticework-invert` | Premortem: reason backward from failure. |
+| `/latticework-decide` | Make a committed call among options. |
+| `/latticework-redteam` | Argue the genuine case against your position. |
+| `/latticework-log` | Record a decision + its premortem to a dated ledger. |
+| `/latticework-review` | Revisit due decisions; grade the call, not the luck. |
 | `/latticework-help` | This card. |
+
+## Decision ledger
+
+`/latticework-log` and `/latticework-review` write to `$LATTICEWORK_LOG` if set,
+else `~/.latticework/decisions.md`. Log a real call with what you feared; review
+it when due and grade the decision by what was knowable, not how it turned out.
 
 ## Off and default
 

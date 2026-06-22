@@ -42,7 +42,17 @@ Resolution: env var > config file > full. `off` starts sessions inactive.
 
 - `/latticework-forward` — trace second- and third-order consequences
 - `/latticework-invert` — premortem; reason backward from failure
+- `/latticework-decide` — make a committed call among options
+- `/latticework-redteam` — argue the genuine case against your position
+- `/latticework-log` — record a decision + its premortem to a dated ledger
+- `/latticework-review` — revisit due decisions; grade the call, not the luck
 - `/latticework-help` — reference card
+
+The log and review commands keep a decision ledger at `$LATTICEWORK_LOG`
+(default `~/.latticework/decisions.md`). Logging a decision with the failure
+modes you feared at the time, then reviewing it when due, closes the loop most
+judgment never closes: it grades the decision by what was knowable, not by how
+it happened to turn out.
 
 ## Install (Claude Code)
 
