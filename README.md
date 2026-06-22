@@ -37,13 +37,16 @@ One sharp conclusion beats five named models.
 
 ## Install
 
-```
-claude plugin install Egarter/latticework
+Load from a local clone:
+
+```bash
+git clone https://github.com/Egarter/latticework.git
+claude --plugin-dir ./latticework
 ```
 
-Or load locally for a single session:
+Or load for a single session without cloning:
 
-```
+```bash
 claude --plugin-dir /path/to/latticework
 ```
 
