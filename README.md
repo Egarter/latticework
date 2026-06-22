@@ -100,10 +100,6 @@ session, so the discipline is always on. A `UserPromptSubmit` hook watches for
 level switches. The full model catalog and domain references load only when a
 problem calls for them, so the per-turn payload stays tiny.
 
-Architecture and hook mechanics are modeled on
-[ponytail](https://github.com/DietrichGebert/ponytail) (MIT). The content —
-the ladder, the models, the skills — is original.
-
 ## License
 
 MIT
