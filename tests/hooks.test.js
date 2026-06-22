@@ -153,6 +153,43 @@ describe('mode-tracker.js', () => {
       fs.rmSync(tmpDir, { recursive: true, force: true });
     }
   });
+
+  // Regression: incidental mentions of level words must NOT flip the mode.
+  it('does NOT turn off on incidental "normal mode" in a sentence', () => {
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'latticework-test-'));
+    try {
+      fs.writeFileSync(path.join(tmpDir, '.latticework-active'), 'full');
+      const out = runTracker('please switch the UI back to normal mode after testing',
+        { CLAUDE_CONFIG_DIR: tmpDir });
+      assert.equal(out, '');
+      assert.equal(fs.readFileSync(path.join(tmpDir, '.latticework-active'), 'utf8'), 'full');
+    } finally {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
+  });
+
+  it('does NOT switch level when latticework is mentioned mid-sentence', () => {
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'latticework-test-'));
+    try {
+      fs.writeFileSync(path.join(tmpDir, '.latticework-active'), 'full');
+      const out = runTracker('I dont want the latticework ultra behavior here',
+        { CLAUDE_CONFIG_DIR: tmpDir });
+      assert.equal(out, '');
+      assert.equal(fs.readFileSync(path.join(tmpDir, '.latticework-active'), 'utf8'), 'full');
+    } finally {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
+  });
+
+  it('still switches when the command starts the prompt', () => {
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'latticework-test-'));
+    try {
+      runTracker('/latticework ultra now please', { CLAUDE_CONFIG_DIR: tmpDir });
+      assert.equal(fs.readFileSync(path.join(tmpDir, '.latticework-active'), 'utf8'), 'ultra');
+    } finally {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
+  });
 });
 
 describe('statusline.sh', () => {

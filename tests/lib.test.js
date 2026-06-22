@@ -114,6 +114,24 @@ describe('buildContext', () => {
     assert.ok(ctx.includes('premortem'));
   });
 
+  it('injects resolvable reference paths for ultra mode', () => {
+    const lib = freshLib();
+    const ctx = lib.buildContext('ultra');
+    for (const f of ['see-the-situation.md', 'trace-the-consequences.md', 'find-leverage-and-decide.md']) {
+      assert.ok(ctx.includes(f), `ultra context missing reference: ${f}`);
+      // The injected path must point at a file that actually exists on disk.
+      const m = ctx.split('\n').find((line) => line.includes(f));
+      const p = m.replace(/^- /, '').split(' — ')[0].trim();
+      assert.ok(fs.existsSync(p), `injected reference path does not exist: ${p}`);
+    }
+  });
+
+  it('does NOT inject reference paths for lite or full', () => {
+    const lib = freshLib();
+    assert.ok(!lib.buildContext('full').includes('see-the-situation.md'));
+    assert.ok(!lib.buildContext('lite').includes('see-the-situation.md'));
+  });
+
   it('includes the ladder content', () => {
     const lib = freshLib();
     const ctx = lib.buildContext('full');

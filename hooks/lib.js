@@ -52,8 +52,18 @@ function getMode() {
 const LEVEL_HEADER = {
   lite: 'Level: LITE. Run rungs 3 (forward) and 4 (backward) silently. Keep the answer tight; do not show the scaffolding.',
   full: 'Level: FULL. Run the whole ladder. Show your reasoning briefly, only where it changed the answer.',
-  ultra: 'Level: ULTRA. Run the whole ladder, pull one domain model from the matching references/ file, and write an explicit premortem before you decide.',
+  ultra: 'Level: ULTRA. Run the whole ladder, write an explicit premortem before you decide, and when a core model does not bite, pull one domain model from this plugin\'s references (paths below).',
 };
+
+// Resolved absolute paths to the domain-model files, appended for ultra only so
+// the injected context is self-contained (lite/full pay no token cost for this).
+function referencesNote() {
+  const dir = path.join(__dirname, '..', 'references');
+  return '\n\nDomain models — read one only if it would change the decision:\n' +
+    '- ' + path.join(dir, 'see-the-situation.md') + ' — framing (rungs 1-2)\n' +
+    '- ' + path.join(dir, 'trace-the-consequences.md') + ' — forward / second-order (rung 3)\n' +
+    '- ' + path.join(dir, 'find-leverage-and-decide.md') + ' — leverage and choosing (rungs 4-5)';
+}
 
 function buildContext(mode) {
   if (mode === 'off') return '';
@@ -61,7 +71,9 @@ function buildContext(mode) {
   try { ladder = fs.readFileSync(path.join(__dirname, 'ladder.md'), 'utf8'); }
   catch (e) { ladder = 'LATTICEWORK active: frame, check competence, run forward (second-order), run backward (inversion), then decide.'; }
   const header = LEVEL_HEADER[mode] || LEVEL_HEADER.full;
-  return header + '\n\n' + ladder;
+  let out = header + '\n\n' + ladder;
+  if (mode === 'ultra') out += referencesNote();
+  return out;
 }
 
 module.exports = { VALID_MODES, DEFAULT_MODE, getDefaultMode, setMode, getMode, buildContext, flagPath };

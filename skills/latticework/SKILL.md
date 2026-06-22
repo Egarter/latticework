@@ -8,6 +8,7 @@ description: >
   run backward via inversion, then decide) and cite a model only when it
   changed the answer. Make sure to apply this whenever a question calls for
   judgment rather than a lookup, even if the user does not say "latticework".
+argument-hint: "[lite|full|ultra]"
 ---
 
 # Latticework
