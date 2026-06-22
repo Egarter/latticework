@@ -4,7 +4,7 @@
   "description": "A latticework of mental models, installable. Makes the agent think in second-order consequences and inversion before it commits to an answer.",
   "owner": {
     "name": "latticework",
-    "url": "https://github.com/your-handle/latticework"
+    "url": "https://github.com/Egarter/latticework"
   },
   "plugins": [
     {

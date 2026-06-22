@@ -47,7 +47,7 @@ Resolution: env var > config file > full. `off` starts sessions inactive.
 ## Install (Claude Code)
 
 ```
-/plugin marketplace add your-handle/latticework
+/plugin marketplace add Egarter/latticework
 /plugin install latticework@latticework
 ```
 
