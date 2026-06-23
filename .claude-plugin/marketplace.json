@@ -1,14 +1,17 @@
 {
   "name": "latticework",
   "owner": {
-    "name": "latticework",
+    "name": "Egarter",
     "url": "https://github.com/Egarter/latticework"
   },
   "plugins": [
     {
       "name": "latticework",
       "description": "Always-on mental-models thinking. Frame, check competence, second-order, invert, decide.",
-      "source": "./",
+      "source": {
+        "source": "github",
+        "repo": "Egarter/latticework"
+      },
       "category": "productivity"
     }
   ]

@@ -37,14 +37,14 @@ One sharp conclusion beats five named models.
 
 ## Install
 
-Load from a local clone:
+From inside a Claude Code session (terminal or VS Code), run:
 
-```bash
-git clone https://github.com/Egarter/latticework.git
-claude --plugin-dir ./latticework
+```
+/plugin marketplace add Egarter/latticework
+/plugin install latticework@latticework
 ```
 
-Or load for a single session without cloning:
+This persists across sessions. To load for a single session instead:
 
 ```bash
 claude --plugin-dir /path/to/latticework
