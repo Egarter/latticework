@@ -18,7 +18,7 @@ and eight standalone skills you can invoke when you need a specific lens:
 | `/latticework-invert` | Premortem — reason backward from failure |
 | `/latticework-reframe` | Generate alternative framings when you're stuck |
 | `/latticework-decide` | Weigh options, check reversibility, commit to a call |
-| `/latticework-redteam` | Argue the genuine case against your position |
+| `/latticework-challenge` | Argue the genuine case against your position |
 | `/latticework-log` | Record a decision + the failure modes you feared |
 | `/latticework-review` | Revisit past decisions — grade the call, not the luck |
 | `/latticework-help` | Quick reference card |

@@ -1,14 +1,14 @@
 ---
-name: latticework-redteam
+name: latticework-challenge
 description: >
   Argue against the user's position. Use when the user asks "poke holes in
-  this", "what am I missing", "argue the other side", "steelman the opposite",
-  "talk me out of it", "red team this", or has stated a plan/preference and
-  needs the genuine case against it rather than agreement. Built to disagree
-  well. One-shot; does not change the active level.
+  this", "what am I missing", "argue the other side", "challenge this",
+  "talk me out of it", or has stated a plan/preference and needs the genuine
+  case against it rather than agreement. Built to disagree well. One-shot;
+  does not change the active level.
 ---
 
-# Latticework: Red-team
+# Latticework: Challenge
 
 One-shot. Your job here is to disagree, honestly and well. The default failure
 of an assistant is agreeing to be liked; this skill exists to override that.
@@ -30,5 +30,5 @@ of an assistant is agreeing to be liked; this skill exists to override that.
    the load-bearing flaw*; or *depends on ___ — resolve that first*.
 
 Do not manufacture objections where the position is sound — saying "this holds,
-and here's the one risk worth watching" is a real red-team result. Strength is
-honest disagreement, not reflexive contrarianism, and not reflexive agreement.
+and here's the one risk worth watching" is a real result. Strength is honest
+disagreement, not reflexive contrarianism, and not reflexive agreement.

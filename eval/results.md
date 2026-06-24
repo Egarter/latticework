@@ -123,7 +123,7 @@ instructions active.
   low-stakes tool choice, personal advice, a coding task, a general strategy
   question.
 - **3 triggering prompts** (should earn an offer): a finalized consequential
-  decision (→ log), a committed one-sided plan (→ red-team), and a user visibly
+  decision (→ log), a committed one-sided plan (→ challenge), and a user visibly
   stuck in circles (→ reframe).
 
 **Results:**

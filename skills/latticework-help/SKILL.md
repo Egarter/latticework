@@ -32,7 +32,7 @@ Cite a model only when it changed the answer.
 | `/latticework-invert` | Premortem: reason backward from failure. |
 | `/latticework-reframe` | Generate alternative framings when you're stuck or solving the wrong problem. |
 | `/latticework-decide` | Make a committed call among options. |
-| `/latticework-redteam` | Argue the genuine case against your position. |
+| `/latticework-challenge` | Argue the genuine case against your position. |
 | `/latticework-log` | Record a decision + its premortem to a dated ledger. |
 | `/latticework-review` | Revisit due decisions; grade the call, not the luck. |
 | `/latticework-help` | This card. |
@@ -53,7 +53,7 @@ Due reviews are surfaced automatically at session start.
 ## In-session tool offers
 
 When active, the ladder may offer one relevant tool at an earned moment — log a
-decision just reached, red-team a forceful one-sided plan, or reframe when you're
+decision just reached, challenge a forceful one-sided plan, or reframe when you're
 visibly stuck. At most one, only when earned, never on routine answers.
 
 ## Off and default

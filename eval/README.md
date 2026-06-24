@@ -17,7 +17,7 @@ through a five-step reasoning ladder before it commits:
 5. **Decide** — commit to one answer, with a tripwire that would change it
 
 Between turns, it offers relevant tools at earned moments: log a decision you
-just made, red-team a one-sided plan, or reframe when you're stuck.
+just made, challenge a one-sided plan, or reframe when you're stuck.
 
 On lookups and simple questions, it stays out of the way.
 
