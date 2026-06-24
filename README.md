@@ -40,7 +40,7 @@ One sharp conclusion beats five named models.
 ## Install
 
 > ### 📦 Download the plugin
-> **[⬇️ latticework.zip](../latticework.zip)** — the packaged plugin, ready to upload.
+> **[⬇️ latticework.zip](https://github.com/Egarter/latticework/releases/latest/download/latticework.zip)** — the packaged plugin, ready to upload.
 > Grab this if you're installing into the Claude app (Desktop / Cowork) by upload.
 > For Claude Code, use the marketplace command below instead.
 
@@ -66,7 +66,7 @@ standalone, the auto-activation just stays quiet.
 
 Latticework installs as a plugin in the Claude app, too. Open **Customize** in
 the left sidebar → **Plugins** tab → **Browse plugins** to install from the
-marketplace, or **upload [`latticework.zip`](../latticework.zip)** directly
+marketplace, or **upload [`latticework.zip`](https://github.com/Egarter/latticework/releases/latest/download/latticework.zip)** directly
 (see the download callout at the top of this section).
 
 **Use it in Cowork if you can.** Here's why the surface matters:
