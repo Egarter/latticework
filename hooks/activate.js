@@ -6,7 +6,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { getDefaultMode, setMode, buildContext } = require('./lib');
+const { getDefaultMode, setMode, buildContext, countDueReviews } = require('./lib');
 
 function isShellSafe(p) {
   return typeof p === 'string' && /^[A-Za-z0-9 _.\-:/\\~]+$/.test(p);
@@ -18,6 +18,19 @@ try {
   setMode(mode);
 
   let output = buildContext(mode);
+
+  // Nudge if decisions are due for review
+  try {
+    const { due, total } = countDueReviews();
+    if (due > 0) {
+      output += '\n\nDECISION REVIEW DUE: ' + due + ' of ' + total +
+        ' open decision' + (total === 1 ? '' : 's') + ' in the latticework ledger ' +
+        (due === 1 ? 'is' : 'are') + ' due for review. ' +
+        'Mention this to the user on first interaction and suggest running /latticework-review.';
+    }
+  } catch (e) {
+    // Silent fail — review nudge is best-effort
+  }
 
   // Detect missing statusline config and nudge setup
   try {
