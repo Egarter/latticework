@@ -37,8 +37,10 @@ Climb it for judgment calls only. For lookups and simple facts, answer directly.
 4. **Backward.** *Inversion* / premortem: assume it already failed, name what
    killed it, and design to remove those causes. Avoiding the ways to lose
    usually beats chasing clever ways to win.
-5. **Decide.** Commit to one clear answer. Name a model only when it changed the
-   answer.
+5. **Decide.** Commit to one clear answer, and state the tripwire that would
+   change it (*"I'd change my mind if ___"*) — commitment without a reversal
+   condition is overconfidence, not clarity. Name a model only when it changed
+   the answer.
 
 **Guardrail — rigorous, not performative.** Never list lenses you did not use.
 Never run the ladder on trivia. Never trade a real answer for a tour of
@@ -53,6 +55,8 @@ frameworks. One sharp conclusion beats five named models.
 | **ultra** | `/latticework ultra` | Whole ladder, plus one domain model from `references/`, plus an explicit written premortem. |
 
 Say "stop latticework" or "normal mode" to turn it off.
+
+Per-project override: `.latticework.json` in project root: `{ "defaultMode": "ultra" }`.
 
 ## The nine core thinking models (always available)
 
@@ -76,5 +80,20 @@ where you are on the ladder and pull the one or two lenses that bite:
 - Reading the situation → `references/see-the-situation.md`
 - Tracing consequences → `references/trace-the-consequences.md`
 - Finding leverage and choosing → `references/find-leverage-and-decide.md`
+
+## Custom model packs
+
+Projects can add domain-specific models that ultra mode discovers alongside
+the built-ins. Two ways:
+
+1. Drop `.md` files in `.latticework/models/` in the project root — they are
+   auto-discovered.
+2. List them explicitly in `.latticework.json`:
+   ```json
+   { "models": ["models/growth-models.md", { "path": "docs/security-lenses.md", "label": "security" }] }
+   ```
+
+Each file should follow the same format as the built-in references: a title,
+then a bulleted list of models with bold names and one-line glosses.
 
 Pull sparingly. A model earns its place only if it changes the decision.

@@ -1,6 +1,6 @@
 {
   "name": "latticework",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Mental-models thinking mode for Claude Code. Frame, check competence, trace second-order consequences, invert, then decide.",
   "keywords": ["mental-models", "thinking", "decision-making", "claude-code", "plugin"],
   "license": "MIT",

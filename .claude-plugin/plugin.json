@@ -1,6 +1,6 @@
 {
   "name": "latticework",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Mental-models thinking mode. Before answering a judgment call, climb a short ladder: frame the real question, check competence, run it forward (second-order), run it backward (inversion), then decide. Cites a model only when it changed the answer.",
   "author": {
     "name": "Egarter",
