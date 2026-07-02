@@ -9,33 +9,108 @@ consequences, assume it failed and ask what killed it, then decide — citing a
 model only when it changed the answer.
 
 It ships as a Claude Code plugin with an always-on mode (injected every session)
-and eight standalone skills you can invoke when you need a specific lens:
-
-| Command | What it does |
-|---------|-------------|
-| `/latticework` | The thinking mode itself (lite / full / ultra) |
-| `/latticework-forward` | Trace second- and third-order consequences |
-| `/latticework-invert` | Premortem — reason backward from failure |
-| `/latticework-reframe` | Generate alternative framings when you're stuck |
-| `/latticework-decide` | Weigh options, check reversibility, commit to a call |
-| `/latticework-challenge` | Argue the genuine case against your position |
-| `/latticework-log` | Record a decision + the failure modes you feared |
-| `/latticework-review` | Revisit past decisions — grade the call, not the luck |
-| `/latticework-help` | Quick reference card |
-
-The log/review pair closes a loop that judgment almost never closes: you record
-what you decided and what you feared at the time, then revisit it later and ask
-whether the *decision* was sound — not whether the outcome was good. Reviews
-show a running calibration tally (held / lucky / unlucky / wrong) with
-confidence tracking, and due reviews are surfaced automatically at session start.
-
-41 mental models ship across three reference files, organized by where they're
-used in the ladder. They load on demand in ultra mode — the per-turn cost stays
-small otherwise.
+and eight standalone skills for when you need a specific lens.
 
 A built-in guardrail keeps it honest: no listing frameworks that weren't used,
 no running the ladder on trivia, no trading a real answer for a tour of lenses.
 One sharp conclusion beats five named models.
+
+## Skills
+
+### `/latticework` — the always-on thinking mode
+
+The core discipline, active every session. When you ask a judgment call — a
+decision, a strategy question, a "should I" — Claude climbs the ladder before
+answering instead of blurting the first-order response. For lookups and simple
+facts it stays out of the way.
+
+Run it at three levels: `lite` (forward + backward only, tight answer), `full`
+(whole ladder, reasoning shown where it changed the answer, default), or `ultra`
+(whole ladder + explicit premortem + one domain model from the reference files).
+
+### `/latticework-forward` — trace consequences
+
+Ask "and then what?" on a decision or change. Most bad calls are
+first-order-good and second-order-bad — the plan looks fine until you follow the
+consequences through two rounds and find where it breaks. Use this when you want
+to map downstream effects before committing: how do people, incentives, and
+feedback loops react to the first move, and then how do they react to that?
+
+*Trigger: "what happens if we do X", "downstream effects", "how will this play
+out", "and then what?"*
+
+### `/latticework-invert` — premortem
+
+Assume the plan already failed and ask what killed it. Projects six to twelve
+months out, names the three to five most likely causes of failure (specific to
+the situation, not generic risks), ranks them by likelihood × damage, and
+designs the cheapest fix for each. The value is in naming the specific ways this
+loses before you're committed.
+
+*Trigger: "what could go wrong", "stress test this", "why might this fail",
+"premortem"*
+
+### `/latticework-reframe` — alternative framings
+
+Generates three to four genuinely different ways to see the same situation, each
+with what shifts and how the answer changes. Use this when you're stuck, going
+in circles, or suspect you're solving the wrong problem. A reframe that doesn't
+change any downstream action wasn't a reframe.
+
+*Trigger: "am I thinking about this wrong", "what am I not seeing", "reframe
+this", going in circles*
+
+### `/latticework-decide` — make a committed call
+
+Structured decision-making: states the real decision, lists every live option
+(including "do nothing"), names what you're optimizing for and what you're
+willing to trade away, checks reversibility, weighs expected value against
+likelihood, premortems the leading option, and commits — with the specific
+evidence that would change the call. A decision you can't state in one sentence
+with one tripwire isn't decided yet.
+
+*Trigger: "which should I pick", "help me decide", "is X or Y better", laying
+out a choice and wanting a recommendation*
+
+### `/latticework-challenge` — argue the other side
+
+Builds the strongest honest case *against* your position — the version a smart,
+informed opponent would make. Not a strawman to knock down, not reflexive
+contrarianism. Names disconfirming evidence, the people and incentives the
+position assumes away, and delivers one of three verdicts: survives (here's the
+strongest objection to keep in view), cracks (here's the load-bearing flaw), or
+depends on ___ (resolve that first).
+
+*Trigger: "poke holes in this", "what am I missing", "challenge this",
+"talk me out of it"*
+
+### `/latticework-log` — record a decision
+
+Records a decision to a dated ledger with what you decided, what alternatives
+you rejected, why, the specific failure modes you feared, and your confidence
+level. The premortem killers are the point — a log entry with no named failure
+modes is just a diary. Sets a review date (default three months out) so the
+decision comes back when there's something real to check against.
+
+Ledger location: `$LATTICEWORK_LOG`, or `.latticework/decisions.md` in the
+project root (if it exists), or `~/.latticework/decisions.md` globally.
+
+*Trigger: after making a real, consequential call worth holding yourself
+accountable to*
+
+### `/latticework-review` — revisit past decisions
+
+Opens the ledger, surfaces decisions whose review date has passed, and grades
+each one — by what was knowable at the time, not by how it turned out. A sound
+call can lose to bad luck; a reckless one can win. Marks each as held (sound,
+worked), lucky (worked, reasoning was flawed), unlucky (sound, lost to something
+unforeseeable), or wrong (a knowable flaw, missed). Shows a running calibration
+tally with confidence tracking across all reviewed decisions.
+
+Due reviews are also surfaced automatically at session start.
+
+*Trigger: "review my decisions", "what decisions are due", or run it at the
+review date you set when you logged*
 
 ## Install
 
@@ -149,10 +224,19 @@ a bulleted list of models with bold names and one-line glosses.
 
 ## How it works
 
-A `SessionStart` hook injects the compact ladder as hidden context every
-session, so the discipline is always on. A `UserPromptSubmit` hook watches for
-level switches. The full model catalog and domain references load only when a
-problem calls for them, so the per-turn payload stays tiny.
+On every session start, a hook injects the ladder as hidden context — Claude
+reads it before your first message, so the discipline is active without you
+doing anything. A second hook watches for level switches typed in chat
+(`latticework ultra`, `latticework lite`, `stop latticework`).
+
+Between turns, the plugin surfaces one relevant skill at earned moments: if you
+just committed to a consequential decision it offers `/latticework-log`; if
+you're committed to a one-sided plan it offers `/latticework-challenge`; if
+you're visibly stuck it offers `/latticework-reframe`. Never more than one, only
+when earned, never on routine answers.
+
+The 41 domain models in `references/` load on demand in ultra mode — the
+per-turn token cost stays small in lite and full.
 
 ## License
 
